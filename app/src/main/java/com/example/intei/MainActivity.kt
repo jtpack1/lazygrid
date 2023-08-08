@@ -7,7 +7,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -22,6 +24,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import com.example.intei.ui.theme.DataState
 import com.example.intei.ui.theme.InteiTheme
@@ -64,6 +68,7 @@ fun Greeting(viewModel: AmbilData){
         }
         is DataState.Success -> {
             Log.e("string4","${result.data}")
+            lazyGridTampil(list = result.data)
 
         }
         else -> {
@@ -81,4 +86,12 @@ fun Greeting(viewModel: AmbilData){
 
 }
 
-
+@Composable
+fun lazyGridTampil(list: MutableList<SiswaModel>) {
+    LazyVerticalGrid(columns = GridCells.Fixed(2)){
+     items(list){nama->
+         Text(text = "${nama.nama}")
+         Spacer(modifier = Modifier.padding(20.dp))
+     }
+    }
+}
